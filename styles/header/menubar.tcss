@@ -1,0 +1,32 @@
+EditMenuScreen {
+    align: left top;
+}
+
+.edit-menu-container {
+    background: #1a1a1a;
+    border: round #9d4edd;
+    width: 30;
+    height: auto;
+    margin: 3 0 0 8;
+}
+
+.edit-menu-item {
+    background: transparent;
+    color: #e0e0e0;
+    padding: 0 2;
+    height: 1;
+    width: 100%;
+}
+
+.edit-menu-item:hover {
+    background: #9d4edd;
+    color: #ffffff;
+}
+
+.separator {
+    background: transparent;
+    color: #9d4edd;
+    padding: 0 2;
+    height: 1;
+    width: 100%;
+}

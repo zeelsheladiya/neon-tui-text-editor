@@ -1,0 +1,174 @@
+/* Dark Neon Theme */
+Screen {
+    layout: vertical;
+    background: #1a1a1a;
+}
+
+/* Menu Bar - Simple List */
+MenuBar {
+    height: 3;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border-bottom: solid #9d4edd;
+    dock: top;
+    padding: 0 1;
+}
+
+.menu-item {
+    background: transparent;
+    color: #e0e0e0;
+    padding: 0 3;
+    width: auto;
+    height: 3;
+    content-align: center middle;
+}
+
+.menu-item:hover {
+    background: #9d4edd;
+    color: #ffffff;
+}
+
+.title {
+    background: transparent;
+    color: #9d4edd;
+    text-align: center;
+    width: 1fr;
+    text-style: bold;
+    content-align: center middle;
+}
+
+
+
+/* Main Body */
+#main-body {
+    layout: horizontal;
+    height: 1fr;
+    margin: 0;
+}
+
+/* File Tree - Neon Cyan Border */
+FileTree {
+    width: 30%;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: round #00f5ff;
+    margin: 0 1 0 0;
+}
+
+Tree {
+    background: transparent;
+    color: #e0e0e0;
+    padding: 1;
+}
+
+Tree:focus {
+    border: round #00f5ff;
+}
+
+/* Editor Tabs - Neon Green Border */
+EditorTabs {
+    width: 70%;
+    background: #1a1a1a;
+    border: round #39ff14;
+    margin: 0;
+}
+
+.tab-bar {
+    height: 4;
+    background: transparent;
+    border-bottom: solid #39ff14;
+    margin: 0 1 1 1;
+    overflow-x: auto;
+    scrollbar-size-horizontal: 0;
+}
+
+.tab {
+    background: #39ff14 10%;
+    color: #e0e0e0;
+    padding: 0 2;
+    border: round #39ff14;
+    margin-right: 1;
+    min-width: 12;
+    max-width: 30;
+    width: auto;
+    height: 3;
+    content-align: center middle;
+}
+
+.tab:hover {
+    background: #39ff14 25%;
+    color: #ffffff;
+    border: round #39ff14;
+}
+
+.tab.active {
+    background: #39ff14 40%;
+    color: #ffffff;
+    text-style: bold;
+    border: round #39ff14;
+}
+
+.new-tab-btn {
+    background: #39ff14 20%;
+    color: #ffffff;
+    padding: 0;
+    width: 6;
+    height: 3;
+    text-align: center;
+    border: round #39ff14;
+    content-align: center middle;
+    text-style: bold;
+}
+
+.new-tab-btn:hover {
+    background: #39ff14;
+    color: #000000;
+}
+
+
+
+TextArea {
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: none;
+    margin: 0 1 1 1;
+}
+
+TextArea:focus {
+    border: round #39ff14;
+}
+
+/* Status Bar - Neon Orange Border */
+StatusBar {
+    height: 3;
+    background: #1a1a1a;
+    color: #e0e0e0;
+    border: round #ff8c00;
+    dock: bottom;
+    margin: 0;
+    layout: horizontal;
+}
+
+#current-file {
+    background: transparent;
+    color: #ff8c00;
+    padding: 0 2;
+    text-style: bold;
+    width: 1fr;
+}
+
+#line-col {
+    background: transparent;
+    color: #e0e0e0;
+    padding: 0 2;
+    text-align: center;
+    width: 20;
+}
+
+#file-type {
+    background: transparent;
+    color: #e0e0e0;
+    padding: 0 2;
+    text-align: right;
+    width: 20;
+}
