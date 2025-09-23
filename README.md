@@ -32,7 +32,7 @@ A modern, VS Code-inspired TUI text editor built with Python and Textual, featur
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/zeelsheladiya/neon-tui-text-editor.git
-   cd text-editor
+   cd neon-tui-text-editor
    ```
 
 2. **Create virtual environment:**
