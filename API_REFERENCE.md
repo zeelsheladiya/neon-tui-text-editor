@@ -43,7 +43,15 @@ def get_clipboard_text(self) -> str
 
 def set_clipboard_text(self, text: str) -> bool
     """Set text to system clipboard"""
+
+def resize_file_tree(self, change: int) -> None
+    """Resize the file tree panel by specified percentage"""
 ```
+
+#### Layout Management
+- **Resizable Panels**: File tree width adjustable from 15% to 80%
+- **State Tracking**: Width tracked in `self.file_tree_width` variable
+- **Responsive Editor**: Editor tabs automatically adjust to remaining space
 
 #### Keyboard Shortcuts
 - `Control+N`: Create new file
@@ -57,6 +65,8 @@ def set_clipboard_text(self, text: str) -> bool
 - `Control+C`: Copy selected text to clipboard
 - `Control+V`: Paste text from clipboard
 - `Control+A`: Select all text in editor
+- `Control+Shift+Left`: Decrease file tree width
+- `Control+Shift+Right`: Increase file tree width
 
 ---
 
@@ -341,6 +351,8 @@ Key("ctrl+x")     # Cut
 Key("ctrl+c")     # Copy
 Key("ctrl+v")     # Paste
 Key("ctrl+a")     # Select all
+Key("ctrl+shift+left")   # Decrease file tree width
+Key("ctrl+shift+right")  # Increase file tree width
 ```
 
 ### Component Events

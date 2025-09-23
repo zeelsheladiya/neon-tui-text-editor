@@ -118,6 +118,8 @@ def on_key(self, event):
 - `Control+C`: Copy
 - `Control+V`: Paste
 - `Control+A`: Select all
+- `Control+Shift+Left`: Decrease file tree width
+- `Control+Shift+Right`: Increase file tree width
 
 ### 3. Adding Menu Items
 
@@ -253,11 +255,13 @@ def on_custom_event(self, event: CustomEvent):
 ### Manual Testing Checklist
 - [ ] Component renders correctly
 - [ ] Styling matches neon theme
-- [ ] Keyboard shortcuts work (Control+N/W/S/J/L/Z/U/X/C/V/A)
+- [ ] Keyboard shortcuts work (Control+N/W/S/J/L/Z/U/X/C/V/A/Shift+Left/Shift+Right)
 - [ ] Tab navigation and auto-scrolling works
 - [ ] Text editing operations (cut/copy/paste/undo/redo/select all)
 - [ ] Edit menu displays and functions correctly
 - [ ] Clipboard integration works with other applications
+- [ ] Panel resizing works (file tree 15%-80% range)
+- [ ] Layout responds properly to width changes
 - [ ] File icons display correctly for different file types
 - [ ] Files don't show expand/collapse arrows
 - [ ] Folders show expand/collapse arrows
@@ -471,6 +475,36 @@ To add support for new file extensions:
 2. **Add new extension** to appropriate category
 3. **Choose appropriate emoji** that represents the file type
 4. **Test with actual files** of that type
+
+## 📐 Resizable Panel System
+
+The editor features resizable panels that allow users to adjust the file tree width.
+
+### Implementation Details
+```python
+# State tracking
+self.file_tree_width = 30  # Default 30%
+
+# Resize method
+def resize_file_tree(self, change: int):
+    current_value = self.file_tree_width
+    new_width = max(15, min(80, current_value + change))
+    self.file_tree_width = new_width
+    file_tree.styles.width = f"{new_width}%"
+```
+
+### Key Features
+- **Range**: 15% to 80% width
+- **Increments**: 5% per keypress
+- **State tracking**: Simple variable instead of CSS parsing
+- **Responsive**: Editor automatically adjusts to remaining space
+
+### Adding New Layout Features
+1. **Add state variables** to track layout properties
+2. **Create resize methods** with proper constraints
+3. **Add keyboard shortcuts** in `on_key()` method
+4. **Update CSS** to support dynamic sizing
+5. **Test across different screen sizes**
 
 ## 📚 Useful Resources
 

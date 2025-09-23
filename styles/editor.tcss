@@ -39,20 +39,25 @@ MenuBar {
 
 
 
-/* Main Body */
+/* Main Body - Resizable Layout */
 #main-body {
     layout: horizontal;
     height: 1fr;
     margin: 0;
 }
 
-/* File Tree - Neon Cyan Border */
-FileTree {
+/* File Tree - Resizable Panel */
+#file-tree {
     width: 30%;
     background: #1a1a1a;
     color: #e0e0e0;
     border: round #00f5ff;
     margin: 0 1 0 0;
+}
+
+FileTree {
+    background: transparent;
+    color: #e0e0e0;
 }
 
 Tree {
@@ -65,12 +70,16 @@ Tree:focus {
     border: round #00f5ff;
 }
 
-/* Editor Tabs - Neon Green Border */
-EditorTabs {
-    width: 70%;
+/* Editor Tabs - Resizable Panel */
+#editor-tabs {
+    width: 1fr;
     background: #1a1a1a;
     border: round #39ff14;
     margin: 0;
+}
+
+EditorTabs {
+    background: transparent;
 }
 
 .tab-bar {

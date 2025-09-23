@@ -31,18 +31,19 @@ class TextEditor(App):
     def __init__(self, root_path: str = None):
         super().__init__()
         self.root_path = Path(root_path) if root_path else Path.cwd()
+        self.file_tree_width = 30  # Track file tree width
         
     def compose(self):
         """Create the application layout"""
         # Header - Menu bar
         yield MenuBar(id="menubar")
         
-        # Body - Horizontal split
+        # Body - Horizontal split with resizable panels
         with Horizontal(id="main-body"):
-            # Left panel - File tree
+            # Left panel - File tree (resizable)
             yield FileTree(self.root_path, id="file-tree")
             
-            # Right panel - Editor with tabs
+            # Right panel - Editor with tabs (resizable)
             yield EditorTabs(id="editor-tabs")
         
         # Footer - Status bar
@@ -111,6 +112,16 @@ class TextEditor(App):
         elif event.key == "ctrl+a":
             # Select All - Control+A
             self.action_select_all()
+            event.prevent_default()
+        elif event.key == "ctrl+shift+left":
+            # Decrease file tree width
+            self.notify("Decreasing file tree width...", severity="info")
+            self.resize_file_tree(-5)
+            event.prevent_default()
+        elif event.key == "ctrl+shift+right":
+            # Increase file tree width
+            self.notify("Increasing file tree width...", severity="info")
+            self.resize_file_tree(5)
             event.prevent_default()
     
     def action_undo(self):
@@ -269,6 +280,31 @@ class TextEditor(App):
                 
         except Exception as e:
             self.notify(f"Select all failed: {e}", severity="error")
+    
+    def resize_file_tree(self, change: int):
+        """Resize the file tree panel"""
+        try:
+            file_tree = self.query_one("#file-tree")
+            
+            # Use our tracked width instead of parsing CSS
+            current_value = self.file_tree_width
+            
+            # Calculate new width
+            new_width = max(15, min(80, current_value + change))
+            
+            # Update our tracked width
+            self.file_tree_width = new_width
+            
+            # Apply new width
+            file_tree.styles.width = f"{new_width}%"
+            
+            # Force refresh
+            file_tree.refresh()
+            
+            self.notify(f"File tree width: {new_width}%", severity="info")
+            
+        except Exception as e:
+            self.notify(f"Resize error: {str(e)}", severity="error")
 
 
 def main():

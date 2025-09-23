@@ -17,6 +17,7 @@ A modern, VS Code-inspired TUI text editor built with Python and Textual, featur
 - **Edit Menu**: Visual edit menu with all text editing options
 - **Smart Icons**: File type-specific icons (Python 🐍, HTML 🌐, CSS 🎨, etc.)
 - **Clean Interface**: Hidden scrollbars with functional navigation
+- **Resizable Panels**: Adjust file tree and editor proportions with keyboard shortcuts
 - **Cross-platform**: Works on macOS, Linux, and Windows
 
 ## 📋 Requirements
@@ -75,6 +76,8 @@ textual run --dev editor.py
 | `Control+C` | Copy | Copy selected text to clipboard |
 | `Control+V` | Paste | Paste text from clipboard |
 | `Control+A` | Select All | Select all text in editor |
+| `Control+Shift+Left` | Resize Panel | Decrease file tree width |
+| `Control+Shift+Right` | Resize Panel | Increase file tree width |
 
 ### Interface Navigation
 
@@ -85,6 +88,7 @@ textual run --dev editor.py
 - **Auto-scrolling**: Tab bar automatically scrolls to show active tab
 - **Text Editing**: Full clipboard integration with cut/copy/paste operations
 - **Edit Menu**: Click "Edit" to see all available text editing options with shortcuts
+- **Resizable Layout**: Use `Control+Shift+Left/Right` to adjust file tree width (15%-80%)
 - **Menu**: File and Edit menus (Edit menu fully functional)
 
 ## 🏗️ Project Structure

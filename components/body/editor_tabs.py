@@ -15,14 +15,13 @@ class EditorTabs(Static):
         
     def compose(self):
         with Vertical():
-            # Tab bar with + button
+            # Tab bar with just + button initially
             with Horizontal(classes="tab-bar"):
-                yield Static("Welcome", classes="tab active", id="welcome-tab")
                 yield Static("+", classes="new-tab-btn", id="new-tab-btn")
             
-            # Editor area
-            yield TextArea("Welcome to Text Editor!\n\nPress Ctrl+N for new file or select a file from the tree.", 
-                          id="editor-area", classes="editor", show_line_numbers=True)
+            # Editor area with welcome message
+            yield TextArea("Welcome to Text Editor!\n\nPress Ctrl+N for new file or select a file from the tree.\nClick the + button above to create a new file.", 
+                          id="editor-area", classes="editor", show_line_numbers=False, read_only=True)
     
     def on_click(self, event):
         """Handle tab and button clicks"""
@@ -78,12 +77,9 @@ class EditorTabs(Static):
             # Remove tab from UI
             active_tab.remove()
             
-            # Switch to welcome tab if no other tabs
+            # Show welcome message if no other tabs
             if not self.open_files:
-                welcome_tab = self.query_one("#welcome-tab")
-                self.switch_to_tab(welcome_tab)
-                editor = self.query_one("#editor-area")
-                editor.text = "Welcome to Text Editor!\n\nPress Ctrl+N for new file or select a file from the tree."
+                self.show_welcome_message()
             else:
                 # Switch to the first available tab
                 first_tab = self.query(".tab").first()
@@ -96,10 +92,10 @@ class EditorTabs(Static):
     def navigate_tab(self, direction: int):
         """Navigate between tabs using arrow keys"""
         try:
-            # Get all tabs
-            all_tabs = list(self.query(".tab"))
-            if len(all_tabs) <= 1:
-                return  # No navigation needed with 0 or 1 tabs
+            # Get all tabs (excluding new-tab-btn)
+            all_tabs = [tab for tab in self.query(".tab") if not tab.id == "new-tab-btn"]
+            if len(all_tabs) == 0:
+                return  # No tabs to navigate
             
             # Find current active tab
             current_index = 0
@@ -119,6 +115,23 @@ class EditorTabs(Static):
             self.scroll_tab_into_view(new_tab)
             
         except Exception as e:
+            pass
+    
+    def show_welcome_message(self):
+        """Show welcome message when no tabs are open"""
+        try:
+            editor = self.query_one("#editor-area")
+            editor.text = "Welcome to Text Editor!\n\nPress Ctrl+N for new file or select a file from the tree.\nClick the + button above to create a new file."
+            editor.show_line_numbers = False
+            editor.read_only = True  # Make welcome message non-editable
+            self.current_tab = None
+            
+            # Update status bar
+            status_bar = self.app.query_one("#status-bar")
+            status_bar.update_current_file("Welcome")
+            status_bar.update_file_type("Plain Text")
+            status_bar.update_line_col(1, 1)
+        except Exception:
             pass
     
     def scroll_tab_into_view(self, tab_widget):
@@ -171,6 +184,12 @@ class EditorTabs(Static):
         # Switch to new tab
         self.switch_to_tab(new_tab)
         
+        # Enable line numbers, make editable, and clear welcome message
+        editor = self.query_one("#editor-area")
+        editor.show_line_numbers = True
+        editor.read_only = False  # Make editable for file editing
+        editor.text = ""
+        
         # Store file info
         self.open_files[filename] = {
             "path": None,
@@ -213,6 +232,8 @@ class EditorTabs(Static):
             self.switch_to_tab(new_tab)
             editor = self.query_one("#editor-area")
             editor.text = content
+            editor.show_line_numbers = True
+            editor.read_only = False  # Make editable for file editing
             
             # Store file info
             self.open_files[filename] = {
@@ -244,12 +265,6 @@ class EditorTabs(Static):
             
             # Get safe_id from tab ID
             tab_id = tab_widget.id
-            if tab_id == "welcome-tab":
-                editor = self.query_one("#editor-area")
-                editor.text = "Welcome to Text Editor!\n\nPress Ctrl+N for new file or select a file from the tree."
-                self.current_tab = None
-                return
-                
             safe_id = tab_id.replace("tab-", "")
             
             # Find filename by safe_id
@@ -257,6 +272,8 @@ class EditorTabs(Static):
                 if file_info.get("safe_id") == safe_id:
                     editor = self.query_one("#editor-area")
                     editor.text = file_info["content"]
+                    editor.show_line_numbers = True
+                    editor.read_only = False  # Make editable for file editing
                     self.current_tab = filename
                     
                     # Update status bar
