@@ -25,7 +25,7 @@ class FileTree(Tree):
                     continue
                     
                 if item.is_dir():
-                    # Use better folder icon
+                    # Use folder emoji
                     dir_node = node.add(f"🗂️  {item.name}", data={"path": item, "type": "directory"})
                     # Add a placeholder for lazy loading
                     dir_node.add("Loading...", data={"type": "placeholder"})
