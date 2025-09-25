@@ -24,9 +24,6 @@ A modern, VS Code-inspired TUI text editor built with Python and Textual, featur
 
 - Python 3.9+
 - Textual library
-- pathlib (built-in)
-- sys (built-in)
-- os (built-in)
 
 ## 🛠️ Installation
 
