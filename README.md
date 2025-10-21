@@ -2,7 +2,7 @@
 
 A modern, VS Code-inspired TUI text editor built with Python and Textual, featuring a sleek neon-themed dark interface with rounded borders and real-time functionality.
 
-![Neon Text Editor](screenshot.png)
+![Neon Text Editor](screenshot.gif)
 
 ## 🚀 Features
 
